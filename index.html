@@ -7,16 +7,29 @@
 <body>
 	<div id="app">
 		<div class="container">
-			<h1>Hello Vue :-)</h1>
-			<div class="alert alert-danger" v-show="!message">
-				<p>You must write a message</p>
+			<div class="addTodoContainer">
+				<h1>Hello Vue</h1>
+				<h3>This is a todo maker</h3>
+				<div class="alert alert-danger" v-show="!message">
+					<p>You must at least write a todo title</p>
+				</div>
+				<div class="alert alert-success" v-show="message">
+					<h3>All right, I have a title, I'm ready to go with to the other todos :)</h3>
+				</div>
+				<textarea v-model="message" class="form-control" placeholder="Title">{{ message }}</textarea><br/>
+				<textarea v-model="content" class="form-control" placeholder="Content">{{ content }}</textarea><br/>
+				<button type="submit" class="btn btn-success" v-show="message" v-on:click="pushTodo">Click me</button>
 			</div>
-			<div class="alert alert-success" v-show="message">
-				<p>Hoorah, you've written a message ! </p>
+			<div class="todos">
+			<ul style="list-style-type:none">
+				<li v-for="todo in todos">
+					<h2>Todo : {{todo.title}}</h2>
+					<p>{{todo.content}}</p>
+				</li>
+			</ul>
 			</div>
-			<textarea v-model="message" class="form-control">{{ message }}</textarea><br/>
-			<button type="submit" class="btn btn-warning" v-show="message">Now you can submit</button>
 		</div>
+
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -25,12 +38,27 @@
 	</div>
 </body>
 <script>
-	new Vue({
+	var app = new Vue({
 		el: "#app",
 		data: {
 			message: "",
+			content: "",
+			number: "",
 			seen: true,
+			todos: [
+				{title: "my first todo", content:"This is my content"}
+			]
+		},
+		methods: {
+			pushTodo : function()
+			{
+				app.todos.push({
+					title: app.message,
+					content: app.content,
+				});
+			}
 		}
+
 
 	})
 	if(this.message){

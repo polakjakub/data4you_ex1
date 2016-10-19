@@ -11,4 +11,8 @@ class zoo {
 	{
 		
 	}
+	protected function feedElephant()
+	{
+		
+	}
 }

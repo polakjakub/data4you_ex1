@@ -15,4 +15,6 @@ class zoo {
 	{
 		
 	}
+	protected function feedMonkey()
+	}
 }
